@@ -16,6 +16,12 @@ class GenreField(models.Model):
         verbose_name = 'Books genre',
         max_length=30
     )
+    genre_descrption = models.TextField(
+        verbose_name = 'Genre description',
+        blank=True, #оба значения, разрешвют полю быть пустым!!!
+        null=True
+    )
+    
     def __str__(self) -> str:
         return f'{self.genre_name}'
 
@@ -32,6 +38,11 @@ class AuthorField(models.Model):
         verbose_name = 'Author of the book',
         max_length=50
     )
+    author_descrption = models.TextField(
+        verbose_name = 'Genre description',
+        blank=True, #оба значения, разрешвют полю быть пустым!!!
+        null=True
+    )        
     def __str__(self) -> str:
         return f'{self.author}'    
 
