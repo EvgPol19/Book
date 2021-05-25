@@ -35,56 +35,56 @@ class AuthorField(models.Model):
     def __str__(self) -> str:
         return f'{self.author}'    
 
-class Book(models.Model):
+# class Book(models.Model):
 
-    books_name = models.CharField(
-        verbose_name = 'The title of the book',
-        max_length=150
-    )
-    author_field = models.ManyToManyField(
-        AuthorField
-    )
-    series_field = models.ForeignKey(
-        SeriesField,
-        on_delete=models.PROTECT
-    )
-    genre_field = models.ForeignKey(
-        GenreField,
-        on_delete=models.PROTECT
-    )
-    publisher_field = models.ForeignKey(
-        PublisherField,
-        on_delete=models.PROTECT
-    )         
-    year = models.IntegerField(
-        verbose_name = 'Year of publication of the book'
-    )
-    number_of_pages = models.IntegerField(
-        verbose_name = 'Number of pages'
-    )   
-    weight_book = models.IntegerField(
-        verbose_name = 'Books weight'
-    )
-    number_of_books_available = models.IntegerField(
-        verbose_name = 'Number of books available'
-    )
-    is_available = models.BooleanField(
-        verbose_name = 'Is the book available?',
-        default=False
-    )
-    created = models.DateTimeField(
-        verbose_name = 'Was catalogued',
-        auto_now=False,
-        auto_now_add=True
-    )
-    updated = models.DateTimeField(
-        verbose_name = 'Was updated',
-        auto_now=True,
-        auto_now_add=False
-    )
+#     books_name = models.CharField(
+#         verbose_name = 'The title of the book',
+#         max_length=150
+#     )
+#     author_field = models.ManyToManyField(
+#         AuthorField
+#     )
+#     series_field = models.ForeignKey(
+#         SeriesField,
+#         on_delete=models.PROTECT
+#     )
+#     genre_field = models.ForeignKey(
+#         GenreField,
+#         on_delete=models.PROTECT
+#     )
+#     publisher_field = models.ForeignKey(
+#         PublisherField,
+#         on_delete=models.PROTECT
+#     )         
+#     year = models.IntegerField(
+#         verbose_name = 'Year of publication of the book'
+#     )
+#     number_of_pages = models.IntegerField(
+#         verbose_name = 'Number of pages'
+#     )   
+#     weight_book = models.IntegerField(
+#         verbose_name = 'Books weight'
+#     )
+#     number_of_books_available = models.IntegerField(
+#         verbose_name = 'Number of books available'
+#     )
+#     is_available = models.BooleanField(
+#         verbose_name = 'Is the book available?',
+#         default=False
+#     )
+#     created = models.DateTimeField(
+#         verbose_name = 'Was catalogued',
+#         auto_now=False,
+#         auto_now_add=True
+#     )
+#     updated = models.DateTimeField(
+#         verbose_name = 'Was updated',
+#         auto_now=True,
+#         auto_now_add=False
+#     )
 
-    def __str__(self) -> str:
-        return f'{self.books_name}, {self.year}'       
+#     def __str__(self) -> str:
+#         return f'{self.books_name}, {self.year}'       
 
 
 
