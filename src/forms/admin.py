@@ -17,7 +17,8 @@ class SeriesFielddAdmin(admin.ModelAdmin):
 class GenreFieldAdmin(admin.ModelAdmin):
     list_display = [
         'pk', 
-        'genre_name']
+        'genre_name',
+        'genre_descrption']
 
 class PublisherFieldAdmin(admin.ModelAdmin):
     list_display = [
@@ -27,7 +28,8 @@ class PublisherFieldAdmin(admin.ModelAdmin):
 class AuthorFieldAdmin(admin.ModelAdmin):
     list_display = [
         'pk', 
-        'author']
+        'author',
+        'author_descrption']
 admin.site.register(models.AuthorField, AuthorFieldAdmin) 
 admin.site.register(models.PublisherField, PublisherFieldAdmin)        
 admin.site.register(models.GenreField, GenreFieldAdmin) 
