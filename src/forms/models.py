@@ -21,7 +21,6 @@ class GenreField(models.Model):
         blank=True, #оба значения, разрешвют полю быть пустым!!!
         null=True
     )
-    
     def __str__(self) -> str:
         return f'{self.genre_name}'
 
@@ -59,7 +58,7 @@ class AuthorField(models.Model):
 #         SeriesField,
 #         on_delete=models.PROTECT
 #     )
-#     genre_field = models.ForeignKey(
+#     genre_field = models.ForeignKey(    related_name!!!
 #         GenreField,
 #         on_delete=models.PROTECT
 #     )

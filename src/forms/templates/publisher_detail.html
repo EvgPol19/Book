@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publisher</title>
+</head>
+<body>
+    <h1> {{ publisher_detail.publisher }}</h1>
+    <p>ID {{ publisher_detail.pk }}</p>
+    <a href="{% url 'publishers_list' %}">К списку серий</a>
+</body>
+</html>
