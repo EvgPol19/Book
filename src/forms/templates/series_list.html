@@ -10,7 +10,12 @@
     <h1>Серии книг</h1>
     <ul>
         {% for series in series_list %}
-        <li><a href="{% url 'series' series.pk %}">{{ series }}</a></li>
+        <li>
+            <a href="{% url 'series' series.pk %}">{{ series }}</a><br>
+            <a href="{% url 'series-update' series.pk %}">Update</a> ||
+            <a href="{% url 'series-delete' series.pk %}">Delete</a>
+        
+        </li>
         {% endfor %}
     </ul>
 </body>

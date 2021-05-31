@@ -27,4 +27,16 @@ urlpatterns = [
     path('authors/<int:authors_id>/', forms.author_detail, name='author'),
     path('publishers/<int:publishers_id>/', forms.publisher_detail, name='publisher'),
     path('genres/<int:genres_id>/', forms.genre_detail, name='genre'),
+    path('create-genre/', forms.genre_create, name='genre-create'),
+    path('update-genre/<int:genres_id>', forms.genre_update, name='genre-update'),
+    path('delete-genre/<int:genres_id>', forms.genre_delete, name='genre-delete'),
+    path('create-series/', forms.series_create, name='series-create'),
+    path('update-series/<int:series_id>', forms.series_update, name='series-update'),
+    path('delete-series/<int:series_id>', forms.series_delete, name='series-delete'),
+    path('create-publisher/', forms.publisher_create, name='publisher-create'),
+    path('update-publisher/<int:publishers_id>', forms.publisher_update, name='publisher-update'),
+    path('delete-publisher/<int:publishers_id>', forms.publisher_delete, name='publisher-delete'),
+    path('create-author/', forms.author_create, name='author-create'),
+    path('update-author/<int:authors_id>', forms.author_update, name='author-update'),
+    path('delete-author/<int:authors_id>', forms.author_delete, name='author-delete')
 ]

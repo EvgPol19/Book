@@ -10,7 +10,11 @@
     <h1>Авторы книг</h1>
     <ul>
         {% for author in authors_list %}
-        <li><a href="{% url 'author' author.pk %}">{{ author }}</a></li>
+        <li>
+            <a href="{% url 'author' author.pk %}">{{ author }}</a><br>
+            <a href="{% url 'author-update' author.pk %}">Update</a> ||
+            <a href="{% url 'author-delete' author.pk %}">Delete</a>
+        </li>
         {% endfor %}
     </ul>
     
