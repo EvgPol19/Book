@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authors</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Authors{% endblock title %}
+{% block body %}
     <h1>Авторы книг</h1>
-    <ul>
-        {% for author in object_list %}
-        <li>
-            <a href="{% url 'author' author.pk %}">{{ author }}</a><br>
-            <a href="{% url 'author-update' author.pk %}">Update</a> ||
-            <a href="{% url 'author-delete' author.pk %}">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
-    
-</body>
-</html>
+        <ul>
+            {% for author in object_list %}
+            <li>
+                <a href="{% url 'form:author' author.pk %}">{{ author }}</a><br>
+                <a href="{% url 'form:author-update' author.pk %}">Update</a> ||
+                <a href="{% url 'form:author-delete' author.pk %}">Delete</a>
+            </li>
+            {% endfor %}
+        </ul>
+{% endblock body %}

@@ -13,7 +13,7 @@ class SeriesField(models.Model):
         return f'{self.series}'
 
     def get_absolute_url(self):
-        return reverse('series', args=[self.pk])
+        return reverse('form:series', args=[self.pk])
 
 class GenreField(models.Model):
     genre_name = models.CharField(                   #справочник
@@ -29,7 +29,7 @@ class GenreField(models.Model):
         return f'{self.genre_name}'
 
     def get_absolute_url(self):
-        return reverse('genre', args=[self.pk])
+        return reverse('form:genre', args=[self.pk])
 
 class PublisherField(models.Model):
     publisher = models.CharField(               #справочник
@@ -40,7 +40,7 @@ class PublisherField(models.Model):
         return f'{self.publisher}'
 
     def get_absolute_url(self):
-        return reverse('publisher', args=[self.pk])
+        return reverse('form:publisher', args=[self.pk])
 
 class AuthorField(models.Model):
     author = models.CharField(                      #справочник
@@ -56,7 +56,7 @@ class AuthorField(models.Model):
         return f'{self.author}'
 
     def get_absolute_url(self):
-        return reverse('author', args=[self.pk])
+        return reverse('form:author', args=[self.pk])
 
 # class Book(models.Model):
 
@@ -109,6 +109,10 @@ class AuthorField(models.Model):
 #     def __str__(self) -> str:
 #         return f'{self.books_name}, {self.year}'       
 
+# Вывод проданых не проданных книг(в наличии или нет) - в view - listview
+# def get_queryset(self):
+#     qs = supper().get_queryset()
+#     return qs.filter(is_sold=True)
 
 
 # Название книги +

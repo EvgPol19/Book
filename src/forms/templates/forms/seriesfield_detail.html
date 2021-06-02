@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Series</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Series{% endblock title %}
+{% block body %}
     <h1> {{ object.series }}</h1>
-    <p>ID {{ object.pk }}</p>
-    <a href="{% url 'series_list' %}">К списку серий</a>
-</body>
-</html>
+        <p>ID {{ object.pk }}</p>
+        <a href="{% url 'form:series_list' %}">К списку серий</a>
+{% endblock body %}

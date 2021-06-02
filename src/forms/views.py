@@ -81,19 +81,19 @@ class GenreUpdateView(UpdateView):
 #----------DELETE--------------
 class SeriesDeleteView(DeleteView):
     model = models.SeriesField
-    success_url = reverse_lazy('series_list')
+    success_url = reverse_lazy('form:series_list')
 
 class AuthorDeleteView(DeleteView):
     model = models.AuthorField
-    success_url = reverse_lazy('authors_list')
+    success_url = reverse_lazy('form:authors_list')
 
 class PublisherDeleteView(DeleteView):
     model = models.PublisherField
-    success_url = reverse_lazy('publishers_list')
+    success_url = reverse_lazy('form:publishers_list')
 
 class GenreDeleteView(DeleteView):
     model = models.GenreField
-    success_url = reverse_lazy('genres_list')
+    success_url = reverse_lazy('form:genres_list')
 
 
 

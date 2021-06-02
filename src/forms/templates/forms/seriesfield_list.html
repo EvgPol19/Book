@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Series</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Series{% endblock title %}
+{% block body %}
     <h1>Серии книг</h1>
-    <ul>
-        {% for series in object_list %}
-        <li>
-            <a href="{% url 'series' series.pk %}">{{ series }}</a><br>
-            <a href="{% url 'series-update' series.pk %}">Update</a> ||
-            <a href="{% url 'series-delete' series.pk %}">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+        <ul>
+            {% for series in object_list %}
+            <li>
+                <a href="{% url 'form:series' series.pk %}">{{ series }}</a><br>
+                <a href="{% url 'form:series-update' series.pk %}">Update</a> ||
+                <a href="{% url 'form:series-delete' series.pk %}">Delete</a>
+            </li>
+            {% endfor %}
+        </ul>
+{% endblock body %}
