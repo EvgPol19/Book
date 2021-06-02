@@ -4,34 +4,34 @@ from . import models
 
 class BookAdmin(admin.ModelAdmin):
     list_display = [
-        'pk', 
+        'pk',
         'created',
         'updated',
-        'books_name',  
+        'books_name',
         'year']
 class SeriesFielddAdmin(admin.ModelAdmin):
     list_display = [
-        'pk', 
+        'pk',
         'series']
 
 class GenreFieldAdmin(admin.ModelAdmin):
     list_display = [
-        'pk', 
+        'pk',
         'genre_name',
         'genre_descrption']
 
 class PublisherFieldAdmin(admin.ModelAdmin):
     list_display = [
-        'pk', 
+        'pk',
         'publisher']
 
 class AuthorFieldAdmin(admin.ModelAdmin):
     list_display = [
-        'pk', 
+        'pk',
         'author',
         'author_descrption']
-admin.site.register(models.AuthorField, AuthorFieldAdmin) 
-admin.site.register(models.PublisherField, PublisherFieldAdmin)        
-admin.site.register(models.GenreField, GenreFieldAdmin) 
+admin.site.register(models.AuthorField, AuthorFieldAdmin)
+admin.site.register(models.PublisherField, PublisherFieldAdmin)
+admin.site.register(models.GenreField, GenreFieldAdmin)
 admin.site.register(models.SeriesField, SeriesFielddAdmin)
 # admin.site.register(models.Book,BookAdmin)

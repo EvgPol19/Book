@@ -9,7 +9,7 @@
 <body>
     <h1>Жанры книг</h1>
     <ul>
-        {% for genre in genres_list %}
+        {% for genre in object_list %}
         <li>
             <a href="{% url 'genre' genre.pk %}">{{ genre }}</a><br>
             <a href="{% url 'genre-update' genre.pk %}">Update</a> ||

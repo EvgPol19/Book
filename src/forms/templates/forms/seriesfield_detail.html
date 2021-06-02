@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Author</title>
+    <title>Series</title>
 </head>
 <body>
-    <h1> {{ author_detail.author }}</h1>
-    <p>ID {{ author_detail.pk }}</p>
-    <p>{{ author_detail.author_descrption }}</p>
-    <a href="{% url 'authors_list' %}">К списку авторов</a>
+    <h1> {{ object.series }}</h1>
+    <p>ID {{ object.pk }}</p>
+    <a href="{% url 'series_list' %}">К списку серий</a>
 </body>
 </html>

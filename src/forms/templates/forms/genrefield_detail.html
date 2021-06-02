@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publisher</title>
+    <title>Genre</title>
 </head>
 <body>
-    <h1> {{ publisher_detail.publisher }}</h1>
-    <p>ID {{ publisher_detail.pk }}</p>
-    <a href="{% url 'publishers_list' %}">К списку серий</a>
+    <h1> {{ object.genre_name }}</h1>
+    <p>ID {{ object.pk }}</p>
+    <p>{{ object.genre_descrption }}</p>
+    <a href="{% url 'genres_list' %}">К списку жанров</a>
 </body>
 </html>
