@@ -7,7 +7,17 @@ from django.urls import reverse, reverse_lazy
 
 
 class Home(TemplateView):
+    add = 'Hello!!!'
     template_name = 'forms/home.html'
+
+    def get_context_data(self, **kwargs):
+        list_series = models.SeriesField.objects.all()
+        context = super().get_context_data(**kwargs)
+        context['add'] = self.add
+        context['list_series'] = list_series
+        return context
+
+
 #----------DETAIL--------------
 class SeriesDetailView(DetailView):
     model = models.SeriesField
