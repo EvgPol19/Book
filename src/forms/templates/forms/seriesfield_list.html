@@ -1,14 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'mng_base.html' %}
 {% block title %}Series{% endblock title %}
 {% block body %}
-    <h1>Серии книг</h1>
-        <ul>
-            {% for series in object_list %}
-            <li>
-                <a href="{% url 'form:series' series.pk %}">{{ series }}</a><br>
-                <a href="{% url 'form:series-update' series.pk %}">Update</a> ||
-                <a href="{% url 'form:series-delete' series.pk %}">Delete</a>
-            </li>
-            {% endfor %}
-        </ul>
+<table class="table table-bordered">
+    <tbody>
+        {% for series in object_list %}
+        <tr>
+            <td>{{ series.pk }}</td>
+            <td><a href="{% url 'form:series' series.pk %}">{{ series }}</a></td>
+            <td><button type="button" class="btn btn-warning"><a href="{% url 'form:series-update' series.pk %}">Update</a></button></td>
+            <td><button type="button" class="btn btn-danger"><a href="{% url 'form:series-delete' series.pk %}">Delete</a></button></td>
+        </tr>
+        {% endfor %}
+</table>
 {% endblock body %}

@@ -1,14 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'mng_base.html' %}
 {% block title %}Publishers{% endblock title %}
 {% block body %}
-    <h1>Издательства книг</h1>
-    <ul>
+<table class="table table-bordered">
+    <tbody>
         {% for publisher in object_list %}
-        <li>
-            <a href="{% url 'form:publisher' publisher.pk %}">{{ publisher }}</a><br>
-            <a href="{% url 'form:publisher-update' publisher.pk %}">Update</a> ||
-            <a href="{% url 'form:publisher-delete' publisher.pk %}">Delete</a>
-        </li>
+        <tr>
+            <td>{{ publisher.pk }}</td>
+            <td><a href="{% url 'form:publisher' publisher.pk %}">{{ publisher }}</a></td>
+            <td><button type="button" class="btn btn-warning"><a href="{% url 'form:publisher-update' publisher.pk %}">Update</a></button></td>
+            <td><button type="button" class="btn btn-danger"><a href="{% url 'form:publisher-delete' publisher.pk %}">Delete</a></button></td>
+        </tr>
         {% endfor %}
-    </ul>
+</table>
 {% endblock body %}

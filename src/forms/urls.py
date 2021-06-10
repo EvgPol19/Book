@@ -23,4 +23,5 @@ urlpatterns = [
     path('create-author/', forms.AuthorCreateView.as_view(), name='author-create'),
     path('update-author/<int:pk>', forms.AuthorUpdateView.as_view(), name='author-update'),
     path('delete-author/<int:pk>', forms.AuthorDeleteView.as_view(), name='author-delete'),
+    path('mng_forms', forms.MngFormsTemplateView.as_view(), name='mng_forms'),
 ]

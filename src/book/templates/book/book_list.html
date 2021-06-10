@@ -1,0 +1,15 @@
+{% extends 'mng_base.html' %}
+{% block title %}Books{% endblock title %}
+{% block body %}
+<table class="table table-bordered">
+    <tbody>
+        {% for book in object_list %}
+        <tr>
+            <td>{{ book.pk }}</td>
+            <td><a href="{% url 'book:book_detail' book.pk %}">{{ book }}</a></td>
+            <td><button type="button" class="btn btn-warning"><a href="{% url 'book:update_book' book.pk %}">Update</a></button></td>
+            <td><button type="button" class="btn btn-danger"><a href="{% url 'book:delete_book' book.pk %}">Delete</a></button></td>
+        </tr>
+        {% endfor %}
+</table>
+{% endblock body %}

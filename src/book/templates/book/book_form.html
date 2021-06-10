@@ -1,0 +1,10 @@
+{% extends 'mng_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Admin{% endblock title %}
+{% block body %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">MOVE</button>
+    </form>
+{% endblock body %}

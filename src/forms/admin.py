@@ -1,14 +1,6 @@
 from django.contrib import admin
 from . import models
 # Register your models here.
-
-class BookAdmin(admin.ModelAdmin):
-    list_display = [
-        'pk',
-        'created',
-        'updated',
-        'books_name',
-        'year']
 class SeriesFielddAdmin(admin.ModelAdmin):
     list_display = [
         'pk',

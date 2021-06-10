@@ -1,5 +1,6 @@
 from django.db import models
 from forms import models as form
+from django.urls import reverse
 
 # Create your models here.
 class Book(models.Model):
@@ -8,22 +9,26 @@ class Book(models.Model):
         max_length=300
     )
     image = models.ImageField(
-        verbose_name='Book image'
+        verbose_name='Book image',
+        upload_to = 'book/%Y/%m/%d/'
     )
     price = models.DecimalField(
         verbose_name='Price',
         max_digits=6,
         decimal_places=2
     )
-    author_field = models.ManyToManyField(
-        form.AuthorField
+    author = models.ManyToManyField(
+        form.AuthorField,
+        related_name='book_author'
     )
-    series_field = models.ForeignKey(
-        SeriesField,
-        on_delete=models.PROTECT
+    series = models.ForeignKey(
+        form.SeriesField,
+        on_delete=models.PROTECT,
+        related_name='book_series'
     )
-    genre_field = models.ManyToManyField(
-        form.GenreField
+    genre = models.ManyToManyField(
+        form.GenreField,
+        related_name='book_genre'
     )
     year = models.IntegerField(
         verbose_name = 'Year of publication of the book'
@@ -50,13 +55,10 @@ class Book(models.Model):
         verbose_name='Age restrictions',
         max_length=25
     )
-    publisher_field = models.ForeignKey(
+    publisher = models.ForeignKey(
         form.PublisherField,
         on_delete=models.PROTECT,
-        related_name='publisher'
-    )
-    number_of_pages = models.IntegerField(
-        verbose_name = 'Number of pages'
+        related_name='book_publisher'
     )
     number_of_books_available = models.IntegerField(
         verbose_name = 'Number of books available'
@@ -80,4 +82,7 @@ class Book(models.Model):
     )
 
     def __str__(self) -> str:
-        return f'{self.books_name}, {self.year}'
+        return f'{self.books_name}'
+
+    def get_absolute_url(self):
+        return reverse('book:book_detail', args=[self.pk])

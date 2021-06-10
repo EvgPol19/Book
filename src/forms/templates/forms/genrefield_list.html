@@ -1,14 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'mng_base.html' %}
 {% block title %}Genres{% endblock title %}
 {% block body %}
-    <h1>Жанры книг</h1>
-        <ul>
-            {% for genre in object_list %}
-            <li>
-                <a href="{% url 'form:genre' genre.pk %}">{{ genre }}</a><br>
-                <a href="{% url 'form:genre-update' genre.pk %}">Update</a> ||
-                <a href="{% url 'form:genre-delete' genre.pk %}">Delete</a>
-            </li>
-            {% endfor %}
-        </ul>
+<table class="table table-bordered">
+    <tbody>
+        {% for genre in object_list %}
+        <tr>
+            <td>{{ genre.pk }}</td>
+            <td><a href="{% url 'form:genre' genre.pk %}">{{ genre }}</a><br></td>
+            <td><button type="button" class="btn btn-warning"><a href="{% url 'form:genre-update' genre.pk %}">Update</a></button></td>
+            <td><button type="button" class="btn btn-danger"><a href="{% url 'form:genre-delete' genre.pk %}">Delete</a></button></td>
+        </tr>
+        {% endfor %}
+</table>
 {% endblock body %}

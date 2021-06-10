@@ -1,0 +1,35 @@
+{% extends 'mng_base.html' %}
+{% block title %}Administration{% endblock title %}
+{% block body %}
+<div class="alert alert-info" role="alert">
+    <a href="{% url 'form:genres_list' %}">Genre list</a>
+</div>
+
+<div class="alert alert-secondary" role="alert">
+    <a href="{% url 'form:series_list' %}">Series list</a>
+</div>
+
+<div class="alert alert-info" role="alert">
+    <a href="{% url 'form:authors_list' %}">Author list</a>
+</div>
+
+<div class="alert alert-secondary"  role="alert">
+    <a href="{% url 'form:publishers_list' %}">Publisher list</a>
+</div>
+
+<div class="alert alert-info" role="alert">
+    <a href="{% url 'form:genre-create' %}">Genre creat</a>
+</div>
+
+<div class="alert alert-secondary" role="alert">
+    <a href="{% url 'form:series-create' %}">Series create</a>
+</div>
+
+<div class="alert alert-info" role="alert">
+    <a href="{% url 'form:author-create' %}">Author create</a>
+</div>
+
+<div class="alert alert-secondary"  role="alert">
+    <a href="{% url 'form:publisher-create' %}">Publisher create</a>
+</div>
+{% endblock body %}

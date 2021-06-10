@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'mng_base.html' %}
 {% block title %}Delete series?{% endblock title %}
 {% block body %}
-    <h1>Удалить серию?</h1>
+    <h1>Delete series?</h1>
         <form action="" method="post">
             {% csrf_token %}
-            <button type="submit">Удалить</button>
+            <button type="button" class="btn btn-danger">Delete</button>
         </form>
 {% endblock body %}
