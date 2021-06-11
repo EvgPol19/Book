@@ -1,16 +1,69 @@
 {% extends 'base.html' %}
 {% block title %}Book{% endblock title %}
 {% block body %}
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{ book.image.url }}" alt="Card image cap">
-        <div class="card-body"></div>
-            <h5 class="card-title">Book {{ object.books_name }}</h5>
-            <p class="card-text">
-                <b>Price </b>: {{ object.price }}
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="box">
+        <div class="image">
+            <img src="{{ book.image.url }}" alt=""/>
+        </div>
+        <div class="text">
+            <h1> {{ object.books_name }}</h2>
+            <table>
+                <tr>
+                    <td>Series</td>
+                    <td class="td_detail">{{ object.series }}</td>
+                </tr>
+                <tr>
+                    <td>Genre</td>
+                    <td>{{ object.genre }}</td>
+                </tr>
+                <tr>
+                    <td>Year</td>
+                    <td>{{ object.year }}</td>
+                </tr>
+                <tr>
+                    <td>Pages</td>
+                    <td>{{ object.pages }}</td>
+                </tr>
+                <tr>
+                    <td>Binding</td>
+                    <td>{{ object.binding }}</td>
+                </tr>
+                <tr>
+                    <td>Format book</td>
+                    <td>{{ object.format_book }}</td>
+                </tr>
+                <tr>
+                    <td>ISBN</td>
+                    <td>{{ object.isbn }}</td>
+                </tr>
+                <tr>
+                    <td>Weight</td>
+                    <td>{{ object.weight }}</td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td>{{ object.age }}</td>
+                </tr>
+                <tr>
+                    <td>Publisher</td>
+                    <td>{{ object.publisher }}</td>
+                </tr>
+                <tr>
+                    <td>Number of books available</td>
+                    <td>{{ object.number_of_books_available }}</td>
+                </tr>
+                <tr>
+                    <td>Rating</td>
+                    <td>{{ object.rating }}</td>
+                </tr>
+            </table>
+            <a href="#" class="btn btn-primary"> {{ object.price }}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </svg>
+            </a>
         </div>
     </div>
-        <a href="{% url 'book:book_list' %}">List of books</a>
+    <div>
 {% endblock body %}
 

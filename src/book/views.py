@@ -4,7 +4,8 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from book.models import Book
 from . import forms
-# Create your views here.
+from forms import models as field
+
 
 class Home(TemplateView):
     model = Book
