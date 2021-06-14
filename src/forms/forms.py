@@ -4,31 +4,21 @@ from . import models
 class CreateGenreForm(forms.ModelForm):
     class Meta:
         model = models.GenreField
-        fields = {
-            'genre_name',
-            'genre_descrption',
-        }
+        fields = '__all__'
 
 class CreateSeriesForm(forms.ModelForm):
     class Meta:
         model = models.SeriesField
-        fields = {
-            'series',
-        }
+        fields = '__all__'
 
 class CreatePublisherForm(forms.ModelForm):
     class Meta:
         model = models.PublisherField
-        fields = {
-            'publisher',
-        }
+        fields = '__all__'
 
 class CreateAuthorForm(forms.ModelForm):
     class Meta:
         model = models.AuthorField
-        fields = {
-            'author',
-            'author_descrption',
-        }
+        fields = '__all__'
 
 

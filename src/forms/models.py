@@ -48,7 +48,7 @@ class AuthorField(models.Model):
         max_length=50
     )
     author_descrption = models.TextField(
-        verbose_name = 'Genre description',
+        verbose_name = 'Author description',
         blank=True, #оба значения, разрешвют полю быть пустым!!!
         null=True
     )
