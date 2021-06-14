@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} {% endblock title %}
+{% block body %}
+    {% for genre in object_list %}
+    <div class="alert alert-primary" role="alert">
+        <a href="{% url 'book:books_by_genre' genre.pk %}">{{ genre }}</a>
+    </div>
+    {% endfor %}
+
+{% endblock body %}

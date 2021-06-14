@@ -55,7 +55,9 @@
         margin-left: 50px;
         float: left;
       }
-      .box {overflow: hidden;}
+      .box {
+        overflow: hidden;
+      }
       .image img {
         width: 300px;
         margin: 25px;
@@ -76,6 +78,14 @@
       .td_detail {
         font-weight: 400;
       }
+      a {
+        text-decoration: none;
+        color: #004085;
+      }
+      .alert {
+        text-align: center;
+        font-size: 18px;
+      }
     </style>
   </head>
 <body class="d-flex flex-column h-100">
@@ -89,14 +99,25 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
           <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#" style="color: rgb(18, 89, 194);">Genres</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'book:books_genre' %}" style="color: darkcyan;">Genres</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"></a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Link
+                Profile
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><a class="dropdown-item" href="#">Log in</a></li>
+                <li><a class="dropdown-item" href="#">Log out</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Profile
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                 <li><a class="dropdown-item" href="#">Log in</a></li>

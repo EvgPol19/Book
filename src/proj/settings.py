@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'forms',
     'book',
+    'customer'
 ]
 
 MIDDLEWARE = [

@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from book.models import Book
+from forms.models import GenreField
 from . import forms
 from forms import models as field
 
@@ -13,7 +14,9 @@ class Home(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['new_books'] = Book.objects.order_by('-created')[0:5]
+        context['new_books'] = Book.objects.all()[:5]
+        context['best_books'] = Book.objects.filter(rating__gte = 8)[:5]
+        context['cheap_books'] = Book.objects.filter(price__lte = 8)[:5]
         return context
 class BookDetailView(DetailView):
     model = Book
@@ -41,3 +44,16 @@ class BookDeletelView(PermissionRequiredMixin, DeleteView):
 
 class MngTemplateView(TemplateView):
     template_name = 'book/mng.html'
+
+class BooksByGenreListView(ListView):
+    model = GenreField
+    template_name = 'book/books_by_genre.html'
+class BooksByGenreDetailView(DetailView):
+    model = GenreField
+    template_name = 'book/books_by_genre_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['genre_books'] = Book.objects.filter(genre = self.object.pk)
+        return context
+

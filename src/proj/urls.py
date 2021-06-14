@@ -21,10 +21,11 @@ from forms import urls, views as forms
 from book import urls, views as book
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('s-admin/', admin.site.urls),
     path('form/', include('forms.urls', namespace='forms')),
     path('book/', include('book.urls', namespace='book')),
-    path('', book.Home.as_view(), name='home')
+    path('customer/', include('customer.urls', namespace='customer')),
+    path('', book.Home.as_view(), name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

@@ -12,4 +12,8 @@
         </tr>
         {% endfor %}
 </table>
+<div class="alert alert-secondary"  role="alert">
+    <a href="{% url 'form:publisher-create' %}">Publisher create</a>
+</div>
+<a href="{% url 'form:mng_forms' %}">Return</a>
 {% endblock body %}
