@@ -14,7 +14,7 @@ class Home(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['new_books'] = Book.objects.all()[:5]
+        context['new_books'] = Book.objects.reverse()[:5]
         context['best_books'] = Book.objects.filter(rating__gte = 8)[:5]
         context['cheap_books'] = Book.objects.filter(price__lte = 8)[:5]
         return context
