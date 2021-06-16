@@ -15,7 +15,7 @@
         {% endfor %}
 </table>
         {% endif %}
-    <div class="card-deck" style="display: flex;">
+    <div class="card-deck">
     {% for book in object_list %}
         <div class="card" style="width: 18rem;">
             <a href="{% url 'book:book_detail' book.pk %}"><img src="{{ book.image.url }}" class="card-img-top" alt="..."></a>
