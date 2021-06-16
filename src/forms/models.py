@@ -6,7 +6,7 @@ from django.urls import reverse
 class SeriesField(models.Model):
     series = models.CharField(                   #справочник
         verbose_name = 'Books series',
-        max_length=30
+        max_length=50
     )
 
     def __str__(self) -> str:

@@ -97,3 +97,4 @@ MEDIA_ROOT = local_settings.MEDIA_ROOT
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REGIRECT_URL = '/'

@@ -14,9 +14,9 @@ class Home(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['new_books'] = Book.objects.order_by('-created')[0:5]
-        context['best_books'] = Book.objects.filter(rating__gte = 8).order_by('-created')[0:5]
-        context['cheap_books'] = Book.objects.filter(price__lte = 8)[:5]
+        context['new_books'] = Book.objects.order_by('-created')[:5]
+        context['best_books'] = Book.objects.filter(rating__gte = 8).order_by('-created')[:5]
+        context['cheap_books'] = Book.objects.filter(price__lte = 8).order_by('-created')[:5]
         return context
 class BookDetailView(DetailView):
     model = Book
