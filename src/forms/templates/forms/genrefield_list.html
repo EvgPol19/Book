@@ -1,6 +1,12 @@
 {% extends 'mng_base.html' %}
 {% block title %}Genres{% endblock title %}
 {% block body %}
+<div class="alert alert-info" role="alert">
+    <a href="{% url 'form:genre-create' %}">Genre creat</a>
+</div>
+<div class="alert alert-danger" role="alert">
+    <a href="{% url 'form:mng_forms' %}">Return</a>
+</div>
 <table class="table table-bordered">
     <tbody>
         {% for genre in object_list %}
@@ -12,8 +18,4 @@
         </tr>
         {% endfor %}
 </table>
-<div class="alert alert-info" role="alert">
-    <a href="{% url 'form:genre-create' %}">Genre creat</a>
-</div>
-<a href="{% url 'form:mng_forms' %}">Return</a>
 {% endblock body %}

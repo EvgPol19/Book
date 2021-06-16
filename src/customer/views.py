@@ -4,7 +4,9 @@ from django.views.generic import CreateView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth import forms
-from .forms import UserAuthenticationForm
+from .forms import UserAuthenticationForm, RegistrationUserForm
+from .models import UserProfile
+
 
 
 class CustomerLoginView(LoginView):
@@ -22,5 +24,6 @@ class ChangePasswordView(PasswordChangeView):
     form_class = forms.PasswordChangeForm
     template_name = 'customer/pch.html'
 class UserCreateView(CreateView):
-    model = User
+    model = UserProfile
     template_name = 'customer/registration.html'
+    form_class = RegistrationUserForm

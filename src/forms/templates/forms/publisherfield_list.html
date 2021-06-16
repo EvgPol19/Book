@@ -1,6 +1,12 @@
 {% extends 'mng_base.html' %}
 {% block title %}Publishers{% endblock title %}
 {% block body %}
+<div class="alert alert-secondary"  role="alert">
+    <a href="{% url 'form:publisher-create' %}">Publisher create</a>
+</div>
+<div class="alert alert-danger"  role="alert">
+    <a href="{% url 'form:mng_forms' %}">Return</a>
+</div>
 <table class="table table-bordered">
     <tbody>
         {% for publisher in object_list %}
@@ -12,8 +18,4 @@
         </tr>
         {% endfor %}
 </table>
-<div class="alert alert-secondary"  role="alert">
-    <a href="{% url 'form:publisher-create' %}">Publisher create</a>
-</div>
-<a href="{% url 'form:mng_forms' %}">Return</a>
 {% endblock body %}
