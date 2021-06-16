@@ -1,8 +1,8 @@
-{% extends 'mng_base.html' %}
+{% extends 'base.html' %}
 {% block title %}Author{% endblock title %}
 {% block body %}
     <h1> {{ object.author }}</h1>
-        <p>ID {{ object.pk }}</p>
+        <p>{{ object.pk }}</p>
         <p>{{ object.author_descrption }}</p>
         <a href="{% url 'form:authors_list' %}">Authors list</a>
 {% endblock body %}

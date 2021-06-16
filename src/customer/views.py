@@ -16,7 +16,7 @@ class CustomerLoginView(LoginView):
         return self.success_url
 
 class CustomerLogoutView(LogoutView):
-    next_page = reverse_lazy('home')
+    success_url = reverse_lazy('home')
 
 class ChangePasswordView(PasswordChangeView):
     form_class = forms.PasswordChangeForm
