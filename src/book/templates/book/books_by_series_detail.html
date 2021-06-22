@@ -3,7 +3,7 @@
 {% block title %} {% endblock title %}
 {% block body %}
 <h1>{{ object }}</h1>
-        <div class="card-deck" style="display: flex;">
+        <div class="card-deck">
             {% for book in series_books %}
             {% include 'book_card.html' %}
             {% endfor %}

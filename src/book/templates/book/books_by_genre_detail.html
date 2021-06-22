@@ -2,7 +2,8 @@
 {% load crispy_forms_tags %}
 {% block title %} {% endblock title %}
 {% block body %}
-        <div class="card-deck" style="display: flex;">
+    <h1>{{ object }}</h1>
+        <div class="card-deck">
             {% for book in genre_books %}
             {% include 'book_card.html' %}
             {% endfor %}
