@@ -13,5 +13,9 @@ urlpatterns = [
     path('book_genre/<int:pk>/', views.BooksByGenreDetailView.as_view(), name='books_by_genre'),
     path('book_author/', views.BooksByAuthorListView.as_view(), name='books_author'),
     path('book_author/<int:pk>/', views.BooksByAuthorDetailView.as_view(), name='books_by_author'),
+    path('book_series/', views.BooksBySeriesListView.as_view(), name='books_series'),
+    path('book_series/<int:pk>/', views.BooksBySeriesDetailView.as_view(), name='books_by_series'),
+    path('book_publisher/', views.BooksByPublisherListView.as_view(), name='books_publisher'),
+    path('book_publisher/<int:pk>/', views.BooksByPublisherDetailView.as_view(), name='books_by_publisher'),
     path('mng/', views.MngTemplateView.as_view(), name='mng')
 ]

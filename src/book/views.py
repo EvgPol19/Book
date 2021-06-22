@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from book.models import Book
-from forms.models import GenreField, AuthorField
+from forms.models import GenreField, AuthorField, SeriesField, PublisherField
 from . import forms
 from forms import models as field
 
@@ -44,7 +44,7 @@ class BookDeletelView(PermissionRequiredMixin, DeleteView):
 
 class MngTemplateView(TemplateView):
     template_name = 'book/mng.html'
-
+#------------------by genre------------------
 class BooksByGenreListView(ListView):
     model = GenreField
     template_name = 'book/books_by_genre.html'
@@ -57,6 +57,7 @@ class BooksByGenreDetailView(DetailView):
         context['genre_books'] = Book.objects.filter(genre = self.object.pk)
         return context
 
+#------------------by author------------------
 class BooksByAuthorListView(ListView):
     model = AuthorField
     template_name = 'book/books_by_author.html'
@@ -69,5 +70,33 @@ class BooksByAuthorDetailView(DetailView):
         context['author_books'] = Book.objects.filter(author = self.object.pk)
         return context
 
+#------------------by series------------------
+class BooksBySeriesListView(ListView):
+    model = SeriesField
+    template_name = 'book/books_by_series.html'
+
+class BooksBySeriesDetailView(DetailView):
+    model = SeriesField
+    template_name = 'book/books_by_series_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['series_books'] = Book.objects.filter(series = self.object.pk)
+        return context
+
+
+#------------------by publisher------------------
+class BooksByPublisherListView(ListView):
+    model = PublisherField
+    template_name = 'book/books_by_publisher.html'
+
+class BooksByPublisherDetailView(DetailView):
+    model = PublisherField
+    template_name = 'book/books_by_publisher_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['publisher_books'] = Book.objects.filter(publisher = self.object.pk)
+        return context
 
 
