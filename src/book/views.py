@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from book.models import Book
-from forms.models import GenreField
+from forms.models import GenreField, AuthorField
 from . import forms
 from forms import models as field
 
@@ -56,4 +56,18 @@ class BooksByGenreDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['genre_books'] = Book.objects.filter(genre = self.object.pk)
         return context
+
+class BooksByAuthorListView(ListView):
+    model = AuthorField
+    template_name = 'book/books_by_author.html'
+class BooksByAuthorDetailView(DetailView):
+    model = AuthorField
+    template_name = 'book/books_by_author_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author_books'] = Book.objects.filter(author = self.object.pk)
+        return context
+
+
 

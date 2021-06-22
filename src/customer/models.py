@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class UserProfile(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -33,7 +33,7 @@ class UserProfile(models.Model):
         null=True,
         default='No record'
     )
-    address_1 = models.CharField(
+    аddress_1 = models.CharField(
         verbose_name='Address 1',
         max_length=150,
         blank=True,

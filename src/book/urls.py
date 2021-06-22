@@ -11,5 +11,7 @@ urlpatterns = [
     path('delete_book/<int:pk>', views.BookDeletelView.as_view(), name='delete_book'),
     path('book_genre/', views.BooksByGenreListView.as_view(), name='books_genre'),
     path('book_genre/<int:pk>/', views.BooksByGenreDetailView.as_view(), name='books_by_genre'),
+    path('book_author/', views.BooksByAuthorListView.as_view(), name='books_author'),
+    path('book_author/<int:pk>/', views.BooksByAuthorDetailView.as_view(), name='books_by_author'),
     path('mng/', views.MngTemplateView.as_view(), name='mng')
 ]

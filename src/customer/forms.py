@@ -1,7 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import Profile
+
 
 class UserAuthenticationForm(AuthenticationForm, forms.ModelForm):
     class Meta:
@@ -10,7 +11,7 @@ class UserAuthenticationForm(AuthenticationForm, forms.ModelForm):
 
 class RegistrationUserForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = Profile
         fields = '__all__'
         # {
         #     'phone', 'country', 'city',
