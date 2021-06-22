@@ -10,6 +10,7 @@ from django.views.generic.edit import ModelFormMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
+from .forms import UserAuthenticationForm
 
 
 class UserCreateView(CreateView):
@@ -24,16 +25,16 @@ class UserCreateView(CreateView):
 
 
 
-# class CustomerLoginView(LoginView):
-#     form_class = UserAuthenticationForm
-#     success_url = reverse_lazy('home')
-#     template_name = 'customer/login.html'
+class UserLoginView(LoginView):
+    form_class = UserAuthenticationForm
+    success_url = reverse_lazy('home')
+    template_name = 'customer/login.html'
 
-#     def get_success_url(self):
-#         return self.success_url
+    def get_success_url(self):
+        return self.success_url
 
-# class CustomerLogoutView(LogoutView):
-#     success_url = reverse_lazy('home')
+class CustomerLogoutView(LogoutView):
+    success_url = reverse_lazy('home')
 
 # class ChangePasswordView(PasswordChangeView):
 #     form_class = forms.PasswordChangeForm
