@@ -27,13 +27,13 @@ class BookListView(ListView):
 class BookCreateView(LoginRequiredMixin, CreateView):
     model = Book
     form_class = forms.CreateBook
-    login_url = '/login/'
+    login_url = '/custumer/login/'
     redirect_field_name = 'redirect_to'
 
 class BookUpdateView(LoginRequiredMixin, UpdateView):
     model = Book
     form_class = forms.CreateBook
-    login_url = '/login/'
+    login_url = '/custumer/login/'
     redirect_field_name = 'redirect_to'
 
 class BookDeletelView(PermissionRequiredMixin, DeleteView):

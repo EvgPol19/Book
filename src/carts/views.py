@@ -1,6 +1,8 @@
-from django.views.generic import DetailView
+from django.views.generic import DetailView, RedirectView
+from django.urls import reverse
 from . import models
 from book import models as book_models
+from . import utils
 
 
 class CartDetailView(DetailView):
@@ -33,3 +35,17 @@ class CartDetailView(DetailView):
                 book_in_cart.quantity = q
                 book_in_cart.save()
         return cart
+
+class RecalculateCart(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        current_cart_pk = self.request.session.get('current_cart_pk')
+        if not current_cart_pk:
+            return reverse('carts:cart_detail')
+        cart_items_from_form = self.request.GET
+        print(cart_items_from_form)
+        action = utils.update_items_in_cart(cart_items_from_form, current_cart_pk)
+        if action == "checkout":
+            url = reverse('orders:checkout')
+        else:
+            url = reverse('carts:cart_detail')
+        return url

@@ -1,26 +1,41 @@
 
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block title %} Профиль {% endblock title %}
+{% block title %} Profile {% endblock title %}
 {% block body %}
+{{profile_data}}
+{{object.pk}}
+{{object.customer.pk}}
 <h1>{{object.first_name}} {{ object.last_name }}</h1>
 <p></p>
-Логин: {{object.username}}</br>
-<p></p>
-Пароль: {{object.password}}</br>
+Login: {{object.username}}</br>
 <p></p>
 e-mail: {{object.email}}</br>
 <p></p>
-Имя: {{object.phone}}</br>
+Phone: {{object.customer.phone}}</br>
 <p></p>
-Фамилия: {{object.country}}</br>
+Country: {{object.customer.country}}</br>
 <p></p>
-Телефон: {{object.city}}</br>
+City: {{object.customer.city}}</br>
 <p></p>
-Индекс: {{object.postcode}}</br>
+Postcode: {{object.customer.postcode}}</br>
 <p></p>
-Адрес: {{object.аddress_1}}</br>
+Address 1: {{object.customer.аddress_1}}</br>
+<p></p>
+Address 2: {{object.customer.аddress_2}}</br>
+<p></p>
+Other: {{object.customer.other}}</br>
 </br>
+<div class="alert alert-info" role="alert">
+    <a href="{% url 'customer:change_password' %}">Change password?</a>
+</div>
+<div class="alert alert-primary" role="alert">
+    <a href="{% url 'customer:user_update' object.pk %}">Change master data?</a>
+</div>
+
+<div class="alert alert-secondary" role="alert">
+    <a href="{% url 'customer:profile_update' object.customer.pk %}">Change additional data?</a>
+</div>
 
 
 {% endblock body %}

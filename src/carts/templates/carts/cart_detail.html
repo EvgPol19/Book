@@ -3,14 +3,21 @@
 {% block body %}
 <h1>Cart</h1><br>
 <table class="table table-bordered">
-    <tbody>
         {% for book_in_cart in object.goods.all %}
         <tr>
             <td>{{ book_in_cart.book.books_name }}, {{ book_in_cart.book.year }}</td>
             <td>{{ book_in_cart.book.price }}</td>
             <td><input type="number" min=0 name="{{ book_in_cart.pk }}" value="{{ book_in_cart.quantity }}"></td>
+            <td>{{ book_in_cart.total_price }}</td>
         </tr>
         {% endfor %}
-    </tbody>
+        <tr>
+            <td colspan="4"> </td>
+        </tr>
+        <tr align="center">
+            <td colspan="4">{{object.total_summ}} руб.</td>
+        </tr>
 </table>
+
+</form>
 {% endblock body %}

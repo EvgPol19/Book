@@ -16,6 +16,14 @@ class Cart(models.Model):
     def __str__(self):
         return f'{self.pk}'
 
+    @property
+    def total_summ(self):
+        all_goods = self.goods.all()
+        total = 0
+        for book in all_goods:
+            total += book.total_price
+        return total
+
 
 
 class BookInCart(models.Model):
@@ -42,3 +50,7 @@ class BookInCart(models.Model):
 
     def __str__(self):
         return f'{self.book.name}, {self.quantity}'
+
+    @property
+    def total_price(self):
+        return self.book.price * self.quantity

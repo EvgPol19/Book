@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 
 
 class Profile(models.Model):
@@ -7,7 +9,10 @@ class Profile(models.Model):
         User,
         on_delete=models.CASCADE,
         verbose_name='User',
-        related_name='user')
+        related_name='customer',
+        blank=True,
+        null=True
+    )
     phone = models.CharField(
         verbose_name='Phone',
         max_length=13
@@ -49,10 +54,13 @@ class Profile(models.Model):
     )
     other = models.TextField(
         verbose_name='Other information',
-        max_length=35,
+        max_length=200,
         blank=True,
         null=True,
         default='No record'
     )
     def __str__(self) -> str:
         return self.user.username
+
+    # def get_absolute_url(self):
+    #     return reverse('user_update', kwargs={'pk': self.pk})

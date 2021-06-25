@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from forms import urls, views as forms
 from book import urls, views as book
+from customer import views as customer_views
 
 urlpatterns = [
     path('s-admin/', admin.site.urls),
