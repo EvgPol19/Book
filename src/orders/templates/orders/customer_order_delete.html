@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Delete order?{% endblock title %}
+{% block body %}
+    <h1>Do you want to delete an order № {{object.pk}}?</h1><br><br>
+    <form action="" method="POST">
+        {% csrf_token %}
+            <button type="submit" class="btn" style="width: 100%; background-color: rgb(129, 230, 174);">Delete</button>
+    </form><br>
+    <div class="alert alert-primary" role="alert">
+        <a href="{% url 'orders:customer_order_list'%}">To the order list</a>
+    </div>
+{% endblock body %}

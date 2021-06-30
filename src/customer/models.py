@@ -60,7 +60,7 @@ class Profile(models.Model):
         default='No record'
     )
     def __str__(self) -> str:
-        return self.user.username
+        return self.phone
 
     # def get_absolute_url(self):
     #     return reverse('user_update', kwargs={'pk': self.pk})

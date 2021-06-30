@@ -9,13 +9,13 @@ class Cart(models.Model):
     customer = models.ForeignKey(
         User,
         null=True,
-        blank=True,
+        blank=False,
         related_name='carts',
         verbose_name='Cart',
         on_delete=models.PROTECT
         )
     def __str__(self):
-        return f'{self.pk}'
+        return f'{self.customer}'
 
     @property
     def total_summ(self):
@@ -24,7 +24,6 @@ class Cart(models.Model):
         for book in all_goods:
             total += book.total_price
         return total
-
 
 
 class BookInCart(models.Model):
@@ -50,7 +49,7 @@ class BookInCart(models.Model):
     )
 
     def __str__(self):
-        return f'{self.book.name}, {self.quantity}'
+        return f'{self.book.books_name}'
 
     @property
     def total_price(self):

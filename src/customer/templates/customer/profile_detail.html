@@ -3,10 +3,11 @@
 {% load crispy_forms_tags %}
 {% block title %} Profile {% endblock title %}
 {% block body %}
-{{profile_data}}
-{{object.pk}}
-{{object.customer.pk}}
+
 <h1>{{object.first_name}} {{ object.last_name }}</h1>
+<div class="alert" style="background-color: rgb(122, 206, 206);" role="alert">
+    <a href="{% url 'orders:customer_order_list' %}" style="color: rgb(82, 79, 79);">My orders</a>
+</div>
 <p></p>
 Login: {{object.username}}</br>
 <p></p>
@@ -27,14 +28,14 @@ Address 2: {{object.customer.аddress_2}}</br>
 Other: {{object.customer.other}}</br>
 </br>
 <div class="alert alert-info" role="alert">
-    <a href="{% url 'customer:change_password' %}">Change password?</a>
+    <a href="{% url 'customer:change_password' %}" style="color: rgb(82, 79, 79);">Change password?</a>
 </div>
 <div class="alert alert-primary" role="alert">
-    <a href="{% url 'customer:user_update' object.pk %}">Change master data?</a>
+    <a href="{% url 'customer:user_update' object.pk %}" style="color: rgb(82, 79, 79);">Change master data?</a>
 </div>
 
 <div class="alert alert-secondary" role="alert">
-    <a href="{% url 'customer:profile_update' object.customer.pk %}">Change additional data?</a>
+    <a href="{% url 'customer:profile_update' object.customer.pk %}" style="color: rgb(82, 79, 79);">Change additional data?</a>
 </div>
 
 
