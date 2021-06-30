@@ -1,8 +1,8 @@
-from django.views.generic import DetailView, RedirectView
-from django.urls import reverse
+from django.views.generic import DetailView, RedirectView, DeleteView, View
+from django.urls import reverse, reverse_lazy
+from django.http import HttpResponseRedirect
 from . import models
 from book import models as book_models
-from . import utils
 
 
 class CartDetailView(DetailView):
@@ -36,16 +36,32 @@ class CartDetailView(DetailView):
                 book_in_cart.save()
         return cart
 
-class RecalculateCart(RedirectView):
-    def get_redirect_url(self, *args, **kwargs):
-        current_cart_pk = self.request.session.get('current_cart_pk')
-        if not current_cart_pk:
-            return reverse('carts:cart_detail')
-        cart_items_from_form = self.request.GET
-        print(cart_items_from_form)
-        action = utils.update_items_in_cart(cart_items_from_form, current_cart_pk)
-        if action == "checkout":
-            url = reverse('orders:checkout')
+class BookInCartDeleteView(DeleteView):
+    model = models.BookInCart
+    success_url = reverse_lazy('carts:cart_detail')
+
+
+class CartView(View):
+    def post(self, request):
+        action = request.POST.get('submit')
+        cart_id = self.request.session.get('cart_id') #словареподобный объект
+        cart, created = models.Cart.objects.get_or_create(
+            pk = cart_id,
+            defaults={},
+            )
+        if created:
+            self.request.session['cart_id'] = cart.pk
+        goods = cart.goods.all()
+        if goods:
+            for key, value in request.POST.items():
+                if 'quantitybook_' in key:
+                    pk = int(key.split('_')[1])
+                    good = goods.get(pk=pk)
+                    good.quantity = int(value)
+                    good.save()
+        if action == 'save_card':
+            return HttpResponseRedirect(reverse_lazy('carts:cart_detail'))
+        elif action == 'create_order':
+            return HttpResponseRedirect(reverse_lazy('orders:create_order'))
         else:
-            url = reverse('carts:cart_detail')
-        return url
+            return HttpResponseRedirect(reverse_lazy('carts:cart_detail'))

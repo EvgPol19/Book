@@ -1,23 +1,48 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Cart{% endblock title %}
 {% block body %}
-<h1>Cart</h1><br>
-<table class="table table-bordered">
-        {% for book_in_cart in object.goods.all %}
-        <tr>
-            <td>{{ book_in_cart.book.books_name }}, {{ book_in_cart.book.year }}</td>
-            <td>{{ book_in_cart.book.price }}</td>
-            <td><input type="number" min=0 name="{{ book_in_cart.pk }}" value="{{ book_in_cart.quantity }}"></td>
-            <td>{{ book_in_cart.total_price }}</td>
-        </tr>
-        {% endfor %}
-        <tr>
-            <td colspan="4"> </td>
-        </tr>
-        <tr align="center">
-            <td colspan="4">{{object.total_summ}} руб.</td>
-        </tr>
-</table>
 
+<h1>Cart {% if request.user.is_authenticated %}{{ user.username }}{% endif %}</h1><br>
+<form action="{% url 'carts:cart_update' %}" method="POST">
+    <table class="table table-bordered">
+            {% for book_in_cart in object.goods.all %}
+            <tr>
+                <td>{{ book_in_cart.book.books_name }}, {{ book_in_cart.book.year }}</td>
+                <td>{{ book_in_cart.book.price }}</td>
+                <td><input type="number" min=1 name="quantitybook_{{ book_in_cart.pk }}" value="{{ book_in_cart.quantity }}"></td>
+                <td>{{ book_in_cart.total_price }}</td>
+                <td>
+                    <form action="{% url 'carts:delete_book_in_cart' book_in_cart.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr align="center">
+                <td colspan="5">{{object.total_summ}} руб.</td>
+            </tr>
+    </table>
+    <div class="alert alert-primary">
+        <button type="submit" class="btn" name='submit' value="save_cart" style="display: contents;">Save cart
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+        </svg>
+        </button>
+    </div>
+    <div class="alert alert-success" role="alert">
+        <button type="submit" class="btn" name='submit' value="create_order" style="display: contents;">Save and order
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+            </svg>
+        </button>
+    </div>
 </form>
 {% endblock body %}

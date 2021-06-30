@@ -35,13 +35,12 @@ class UserCreateView(CreateView):
     template_name = 'customer/registration.html'
     success_url = reverse_lazy('customer:user_update')
     def form_valid(self, form):
-        form_valid = super().form_valid(form)
         username = form.cleaned_data["username"]
         password = form.cleaned_data["password"]
         aut_user = authenticate(username=username, password=password)
         aut_user.groups.add(Group.objects.get(name='Customers'))
         login(self.request, aut_user)
-        return form_valid
+        return super().form_valid(form)
 
 class ProfileCreateView(CreateView):
     model = Profile

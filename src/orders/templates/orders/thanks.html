@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Thak you{% endblock title %}
+{% block body %}
+<h1>{% if request.user.is_authenticated %}{{ user }}{% endif %}, thank you for the order. </h1><br>
+    <h2 style="text-align: center;">The manager will contact you</h2>
+{% endblock body %}

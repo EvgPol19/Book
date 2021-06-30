@@ -6,6 +6,7 @@ from book.models import Book
 from forms.models import GenreField, AuthorField, SeriesField, PublisherField
 from . import forms
 from forms import models as field
+from django.db.models import Q
 
 
 class Home(TemplateView):
@@ -23,6 +24,16 @@ class BookDetailView(DetailView):
 
 class BookListView(ListView):
     model = Book
+#____________search_______________
+    def get_queryset(self):
+        qs = super().get_queryset()
+        q = self.request.GET.get('q')
+        if q:
+            qs = qs.filter(Q(books_name__icontains=q))
+        return qs
+    def get_context_data(self, **kwargs):
+        q = self.request.GET.get('q')
+        return super().get_context_data(**kwargs)
 
 class BookCreateView(LoginRequiredMixin, CreateView):
     model = Book
