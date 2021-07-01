@@ -64,7 +64,7 @@ class UserProfileDetailView(DetailView):
         context['profile_data'] = Profile.objects.filter(user = self.request.user)
         return context
 
-#----------------update profile----------------
+#----------------update----------------
 class ProfileUpdateView(UpdateView):
     model = Profile
     template_name = 'customer/profile_update.html'

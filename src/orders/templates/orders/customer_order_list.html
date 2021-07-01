@@ -14,7 +14,7 @@
             </td>
             <td>{{ order.cart.total_summ }}</td>
             <td>{{ order.created }}</td>
-            <td>{{ order.cart.customer.аddress_1 }}</td>
+            <td>{{ order.status }}</td>
             <td>
                 <a href="{% url 'orders:customer_order_delete' order.pk %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">

@@ -9,7 +9,7 @@ class Cart(models.Model):
     customer = models.ForeignKey(
         User,
         null=True,
-        blank=False,
+        blank=True,
         related_name='carts',
         verbose_name='Cart',
         on_delete=models.PROTECT
