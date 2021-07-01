@@ -94,7 +94,7 @@ class ManagerOrderUpdateView(UpdateView):
     model = models.Order
     template_name = 'orders/manager_order_update.html'
     success_url = reverse_lazy('orders:manager_order_list')
-    fields = ['country', 'city', 'address', 'phone', 'other']
+    fields = ['country', 'city', 'address', 'phone', 'other', 'status']
 
 class ManagerOrderDeleteView(DeleteView):
     model = models.Order

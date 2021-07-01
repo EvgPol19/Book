@@ -1,5 +1,6 @@
 from django.db import models
 from carts.models import Cart
+from forms.models import StatusOrder
 
 # Create your models here.
 
@@ -56,4 +57,11 @@ class Order(models.Model):
         auto_now=True,
         auto_now_add=False
     )
-
+    status = models.ForeignKey(
+        StatusOrder,
+        on_delete=models.PROTECT,
+        related_name='status_orders',
+        default=1
+    )
+    def __str__(self) -> str:
+        return f'{self.phone}'

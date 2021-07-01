@@ -22,6 +22,13 @@ class AuthorFieldAdmin(admin.ModelAdmin):
         'pk',
         'author',
         'author_descrption']
+
+class StatusOrderdAdmin(admin.ModelAdmin):
+    list_display = [
+        'pk',
+        'status']
+
+admin.site.register(models.StatusOrder, StatusOrderdAdmin)
 admin.site.register(models.AuthorField, AuthorFieldAdmin)
 admin.site.register(models.PublisherField, PublisherFieldAdmin)
 admin.site.register(models.GenreField, GenreFieldAdmin)

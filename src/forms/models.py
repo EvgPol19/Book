@@ -57,3 +57,12 @@ class AuthorField(models.Model):
 
     def get_absolute_url(self):
         return reverse('form:author', args=[self.pk])
+
+class StatusOrder(models.Model):
+    status = models.CharField(                   #справочник
+        verbose_name = 'Status order',
+        max_length=50
+    )
+
+    def __str__(self) -> str:
+        return f'{self.status}'

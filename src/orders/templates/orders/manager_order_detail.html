@@ -38,6 +38,10 @@
             <td>Total summ</td>
             <td>{{object.cart.total_summ}}</td>
         </tr>
+        <tr>
+            <td>Status order</td>
+            <td>{{object.status}}</td>
+        </tr>
     </table>
     <div class="alert alert-primary" role="alert">
         <a href="{% url 'orders:manager_order_list'%}">To the order list</a>

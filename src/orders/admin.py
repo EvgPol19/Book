@@ -10,6 +10,7 @@ class OrderAdmin(admin.ModelAdmin):
         'city',
         'address',
         'phone',
-        'other']
+        'other',
+        'status']
 
 admin.site.register(models.Order, OrderAdmin)
