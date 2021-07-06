@@ -14,5 +14,4 @@ urlpatterns = [
     path('manager_order_detail/<int:pk>/', views.ManagerOrderDetailView.as_view(), name = 'manager_order_detail'),
     path('manager_order_update/<int:pk>/', views.ManagerOrderUpdateView.as_view(), name = 'manager_order_update'),
     path('manager_cancel_order/<int:pk>/', views.ManagerCancelOrder.as_view(), name='manager_cancel_order'),
-    path('thanks/', views.Thanks.as_view(), name='thanks'),
 ]

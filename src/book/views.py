@@ -24,6 +24,7 @@ class BookDetailView(DetailView):
 
 class BookListView(ListView):
     model = Book
+    paginate_by = 16
 #____________search_______________
     def get_queryset(self):
         qs = super().get_queryset()

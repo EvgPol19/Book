@@ -107,6 +107,12 @@
       .card-deck {
           display: block;
       }
+      .page-link {
+        color: darkcyan;
+      }
+      .page-link:hover {
+        color: rgb(73, 175, 133);
+      }
     </style>
   </head>
 <body class="d-flex flex-column h-100">
@@ -172,11 +178,15 @@
               </div>
         </div>
       </div>
-    </nav>
+    </nav><br>
   </header>
-  <main class="flex-shrink-0">
-    <div class="container"></div>
-  </main>
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-primary" role="alert" style="background-color: white;">
+      {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
     {% block body %}{% endblock body %}
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted">

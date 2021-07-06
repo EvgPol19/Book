@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import FormView, TemplateView, ListView, DetailView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from . import models, forms
@@ -11,7 +12,6 @@ from carts.models import Cart
 class OrderCreate(FormView):
     form_class = forms.OrderCreateForm
     template_name = 'orders/order_create.html'
-    success_url = reverse_lazy('orders:thanks')
 
     def get_initial(self):
         if self.request.user.is_anonymous:
@@ -51,7 +51,8 @@ class OrderCreate(FormView):
             phone=phone
         )
         del self.request.session['cart_id']
-        return HttpResponseRedirect(reverse_lazy('carts:cart_detail'))
+        messages.add_message(self.request, messages.INFO, f'{self.request.user}, thank you for your order. The manager will contact you shortly.')
+        return HttpResponseRedirect(reverse_lazy('home'))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -73,6 +74,7 @@ class OrderCreate(FormView):
 class CustomerOrderListView(LoginRequiredMixin, ListView):
     model = models.Order
     template_name = 'orders/customer_order_list.html'
+    paginate_by = 10
     def get_queryset(self):
         customer = self.request.user
         carts = customer.carts.all()
@@ -82,9 +84,13 @@ class CustomerOrderListView(LoginRequiredMixin, ListView):
 class CustomerOrderDetailView(LoginRequiredMixin, DetailView):
     model = models.Order
     template_name = 'orders/customer_order_detail.html'
-    def get_object(self):
 
-        return self.request.user
+    def get_object(self):
+        customer = self.request.user
+        carts = customer.carts.all()
+        print(carts)
+        orders = models.Order.objects.filter(cart__in=carts)
+        return orders
 
 
 class CustomerOrderUpdateView(LoginRequiredMixin, UpdateView):
@@ -107,6 +113,7 @@ class ManagerOrderListView(PermissionRequiredMixin, LoginRequiredMixin, ListView
     login_url = '/custumer/login/'
     redirect_field_name = 'redirect_to'
     permission_required = 'orders.view_order'
+    paginate_by = 15
 
 class ManagerOrderDetailView(PermissionRequiredMixin, LoginRequiredMixin, DetailView):
     model = models.Order
@@ -132,8 +139,3 @@ class ManagerCancelOrder(PermissionRequiredMixin, LoginRequiredMixin, UpdateView
     login_url = '/custumer/login/'
     redirect_field_name = 'redirect_to'
     permission_required = 'orders.change_order'
-
-
-#______________thanks______________
-class Thanks(TemplateView):
-    template_name = 'orders/thanks.html'
