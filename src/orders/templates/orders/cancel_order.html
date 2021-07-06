@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block title %}Cancel {{ object.pk }}</title>{% endblock title %}
+
+{% block body %}
+    <div class=container>
+        <h1>Cancel order {{ object.pk }}?</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br><button class="btn btn-danger" value="Update" style="width: 100%; background-color: rgb(235, 69, 69);">Cancel</button>
+        </form>
+    </div>
+{% endblock body %}

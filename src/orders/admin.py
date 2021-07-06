@@ -11,6 +11,7 @@ class OrderAdmin(admin.ModelAdmin):
         'address',
         'phone',
         'other',
-        'status']
+        'status_mng',
+        'status_cancel']
 
 admin.site.register(models.Order, OrderAdmin)

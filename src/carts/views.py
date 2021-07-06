@@ -1,8 +1,9 @@
-from django.views.generic import DetailView, RedirectView, DeleteView, View
+from django.views.generic import DetailView, RedirectView, View, RedirectView
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from . import models
 from book import models as book_models
+
 
 
 class CartDetailView(DetailView):
@@ -10,10 +11,15 @@ class CartDetailView(DetailView):
     model = models.Cart
 
     def get_object(self, queryset=None):
-        # cart
-        cart_id = self.request.session.get('cart_id') #словареподобный объект
+        cart_id = self.request.session.get('cart_id')
+        customer = self.request.user
+
+        if customer.is_anonymous:
+            customer = None
+
         cart, created = models.Cart.objects.get_or_create(
             pk = cart_id,
+            customer = customer,
             defaults={},
         )
         if created:
@@ -36,14 +42,18 @@ class CartDetailView(DetailView):
                 book_in_cart.save()
         return cart
 
-class BookInCartDeleteView(DeleteView):
+class BookInCartDeleteView(RedirectView):
     model = models.BookInCart
     success_url = reverse_lazy('carts:cart_detail')
 
+    def get_redirect_url(self, *args, **kwargs):
+        self.model.objects.get(pk=self.kwargs.get('pk')).delete()
+        return self.success_url
 
 class CartView(View):
     def post(self, request):
         action = request.POST.get('submit')
+        print(action)
         cart_id = self.request.session.get('cart_id') #словареподобный объект
         cart, created = models.Cart.objects.get_or_create(
             pk = cart_id,

@@ -35,26 +35,32 @@ class BookListView(ListView):
         q = self.request.GET.get('q')
         return super().get_context_data(**kwargs)
 
-class BookCreateView(LoginRequiredMixin, CreateView):
+class BookCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     model = Book
     form_class = forms.CreateBook
     login_url = '/custumer/login/'
     redirect_field_name = 'redirect_to'
-
-class BookUpdateView(LoginRequiredMixin, UpdateView):
-    model = Book
-    form_class = forms.CreateBook
-    login_url = '/custumer/login/'
-    redirect_field_name = 'redirect_to'
-
-class BookDeletelView(PermissionRequiredMixin, DeleteView):
-    model = Book
-    login_url = '/login/'
-    permission_required = 'book_delete_book'
+    permission_required = 'book.add_book'
     success_url = reverse_lazy('book:book_list')
 
-class MngTemplateView(TemplateView):
+class BookUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    model = Book
+    form_class = forms.CreateBook
+    login_url = '/custumer/login/'
+    redirect_field_name = 'redirect_to'
+    permission_required = 'book.change_book'
+    success_url = reverse_lazy('book:book_list')
+
+class BookDeletelView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    model = Book
+    login_url = '/login/'
+    permission_required = 'book.delete_book'
+    success_url = reverse_lazy('book:book_list')
+
+class MngTemplateView(PermissionRequiredMixin, LoginRequiredMixin, TemplateView):
     template_name = 'book/mng.html'
+    permission_required = 'book.delete_book'
+
 #------------------by genre------------------
 class BooksByGenreListView(ListView):
     model = GenreField

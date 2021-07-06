@@ -3,7 +3,21 @@
 {% block title %}Order {{ object.pk }}{% endblock title %}
 {% block body %}
     <h1> Order № {{ object.pk }}</h1><br>
+    {{object.pk}}
+    {{object.country}}
+    {{object.user.carts}}
+    {{order}}
     <table class="table table-striped">
+        <tr>
+            <td>Books</td>
+            <td>
+                {% for book in order.cart.goods.all %}
+                {{book}} <br>
+                Unit price {{book.unit_price}} <br>
+                Quantity {{book.quantity}} <br><br>
+                {% endfor %}
+            </td>
+        </tr>
         <tr>
             <td>Country</td>
             <td>{{ object.country }}</td>
@@ -21,26 +35,27 @@
             <td>{{ object.phone }}</td>
         </tr>
         <tr>
-            <td>Other information</td>
+            <td>Comment</td>
             <td>{{ object.other }}</td>
-        </tr>
-        <tr>
-            <td>Books</td>
-            <td>
-                {% for book in order.cart.goods.all %}
-                {{book}} <br>
-                Unit price {{book.unit_price}} <br>
-                Quantity {{book.quantity}} <br><br>
-                {% endfor %}
-            </td>
         </tr>
         <tr>
             <td>Total summ</td>
             <td>{{object.cart.total_summ}}</td>
         </tr>
         <tr>
-            <td>Status order</td>
-            <td>{{object.status}}</td>
+            <td>Status|Cancel order</td>
+            <td>
+                {% if not order.status_cancel %}
+                    {{ order.status_mng }} |
+                {% endif %}
+                {% if order.status_cancel %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+                Order was canceled
+                {% endif %}
+            </td>
         </tr>
     </table>
     <div class="alert alert-primary" role="alert">

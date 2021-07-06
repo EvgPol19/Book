@@ -57,11 +57,15 @@ class Order(models.Model):
         auto_now=True,
         auto_now_add=False
     )
-    status = models.ForeignKey(
+    status_mng = models.ForeignKey(
         StatusOrder,
         on_delete=models.PROTECT,
         related_name='status_orders',
         default=1
     )
+    status_cancel = models.BooleanField(
+        verbose_name='Cancel order?',
+        default=False
+    )
     def __str__(self) -> str:
-        return f'{self.phone}'
+        return f'{self.phone}, {self.status_cancel}'

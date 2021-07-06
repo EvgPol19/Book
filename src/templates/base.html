@@ -143,12 +143,12 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                 {% if request.user.is_authenticated %}
-                <li><a class="dropdown-item" href="{% url 'customer:profile_detail' user.pk %}">{{ user }}</a></li>
+                <li><a class="dropdown-item" href="{% url 'customer:profile_detail' %}">{{ user }}</a></li>
                 {% endif %}
                 <li><a class="dropdown-item" href="{% url 'customer:login' %}">Log in</a></li>
                 <li><a class="dropdown-item" href="{% url 'customer:logout' %}">Log out</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{% url 'customer:registration' %}">Sign in</a></li>
+                <li><a class="dropdown-item" href="{% url 'customer:user_create' %}">Sign in</a></li>
               </ul>
             </li>
             <form class="d-flex" action="{% url 'book:book_list' %}">
@@ -188,9 +188,6 @@
     <div class="me-5 d-none d-lg-block">
       <span></span>
     </div>
-    <!-- Left -->
-
-    <!-- Right -->
     <div>
       <a href="" class="me-4 text-reset">
         <i class="fab fa-facebook-f"></i>
@@ -236,16 +233,10 @@
             Useful links
           </h6>
           <p>
-            <a href="#!" class="text-reset">Pricing</a>
+            <a href="{% url 'book:book_list' %}" class="text-reset">Books</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Settings</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Orders</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Help</a>
+            <a href="{% url 'orders:customer_order_list' %}" class="text-reset">Orders</a>
           </p>
         </div>
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

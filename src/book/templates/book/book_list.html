@@ -4,7 +4,7 @@
 {% block body %}
 <table class="table table-bordered">
     <tbody>
-        {% if user.is_superuser %}
+        {% if user.is_superuser or user.is_staff %}
         {% for book in object_list %}
         <tr>
             <td>{{ book.pk }}</td>

@@ -30,9 +30,15 @@ class OrderCreate(FormView):
         }
 
     def form_valid(self, form):
-        cart_id = self.request.session.get('cart_id') #словареподобный объект
-        cart, created = models.Cart.objects.get_or_create(
+        cart_id = self.request.session.get('cart_id')
+        customer = self.request.user
+
+        if customer.is_anonymous:
+            customer = None
+
+        cart, created = Cart.objects.get_or_create(
             pk = cart_id,
+            customer = customer,
             defaults={},
             )
         if created:
@@ -44,14 +50,20 @@ class OrderCreate(FormView):
             address=address,
             phone=phone
         )
-        self.request.session.delete('cart_id')
-        return super().form_valid(form)
+        del self.request.session['cart_id']
+        return HttpResponseRedirect(reverse_lazy('carts:cart_detail'))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         cart_id = self.request.session.get('cart_id') #словареподобный объект
-        cart, created = models.Cart.objects.get_or_create(
+        customer = self.request.user
+
+        if customer.is_anonymous:
+            customer = None
+
+        cart, created = Cart.objects.get_or_create(
             pk = cart_id,
+            customer = customer,
             defaults={},
             )
         context['object'] = cart
@@ -62,51 +74,65 @@ class CustomerOrderListView(LoginRequiredMixin, ListView):
     model = models.Order
     template_name = 'orders/customer_order_list.html'
     def get_queryset(self):
-        customer_phone = self.request.user.customer.phone
-        current_customer_orders = models.Order.objects.filter(phone = customer_phone)
-        return current_customer_orders
+        customer = self.request.user
+        carts = customer.carts.all()
+        orders = models.Order.objects.filter(cart__in=carts)
+        return orders
 
 class CustomerOrderDetailView(LoginRequiredMixin, DetailView):
     model = models.Order
     template_name = 'orders/customer_order_detail.html'
+    def get_object(self):
+
+        return self.request.user
+
 
 class CustomerOrderUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Order
     fields = ['country', 'city', 'address', 'phone', 'other']
     template_name = 'orders/customer_order_update.html'
     success_url = reverse_lazy('orders:customer_order_list')
-
-class CustomerOrderDeleteView(LoginRequiredMixin, DeleteView):
+    def get_object(self):
+        return self.request.user.carts.goods
+class CustomerCancelOrder(LoginRequiredMixin, UpdateView):
+    template_name = 'orders/cancel_order.html'
     model = models.Order
-    template_name = 'orders/customer_order_delete.html'
+    fields = ('status_cancel',)
     success_url = reverse_lazy('orders:customer_order_list')
 
 #______________managers views______________
-class ManagerOrderListView(ListView):
+class ManagerOrderListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
     model = models.Order
     template_name = 'orders/manager_order_list.html'
+    login_url = '/custumer/login/'
+    redirect_field_name = 'redirect_to'
+    permission_required = 'orders.view_order'
 
-class ManagerOrderDetailView(DetailView):
+class ManagerOrderDetailView(PermissionRequiredMixin, LoginRequiredMixin, DetailView):
     model = models.Order
     template_name = 'orders/manager_order_detail.html'
+    login_url = '/custumer/login/'
+    redirect_field_name = 'redirect_to'
+    permission_required = 'orders.view_order'
 
-class ManagerOrderUpdateView(UpdateView):
+class ManagerOrderUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     model = models.Order
     template_name = 'orders/manager_order_update.html'
     success_url = reverse_lazy('orders:manager_order_list')
-    fields = ['country', 'city', 'address', 'phone', 'other', 'status']
+    fields = ['country', 'city', 'address', 'phone', 'other', 'status_mng', 'status_cancel']
+    login_url = '/custumer/login/'
+    redirect_field_name = 'redirect_to'
+    permission_required = 'orders.change_order'
 
-class ManagerOrderDeleteView(DeleteView):
+class ManagerCancelOrder(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    template_name = 'orders/cancel_order.html'
     model = models.Order
-    template_name = 'orders/manager_order_delete.html'
+    fields = ('status_cancel',)
+    success_url = reverse_lazy('orders:manager_order_list')
+    login_url = '/custumer/login/'
+    redirect_field_name = 'redirect_to'
+    permission_required = 'orders.change_order'
 
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        success_url = reverse_lazy('orders:manager_order_list')
-        cart_on_delete = Cart.objects.filter(pk = self.object.pk)
-        self.object.delete()
-        cart_on_delete.delete()
-        return HttpResponseRedirect(success_url)
 
 #______________thanks______________
 class Thanks(TemplateView):

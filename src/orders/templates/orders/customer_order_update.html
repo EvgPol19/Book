@@ -1,9 +1,19 @@
 {% extends "base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block title %}Edit order{% endblock title %}
 {% block body %}
     <h1>Order № {{ object.pk }}</h1>
+    <table class="table table-striped">
+        {% for book in order.cart.goods.all %}
+        <tr>
+            <td>{{book}}</td>
+            <td>{{book.unit_price}}</td>
+            <td>{{book.quantity}}</td>
+        </tr>
+        {% endfor %}
+    </table>
     <div class="col-5">
         <form action="" method="POST">
             {% csrf_token %}
