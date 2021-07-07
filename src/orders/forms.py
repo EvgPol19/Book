@@ -8,5 +8,4 @@ class OrderCreateForm(forms.Form):
     address = forms.CharField(label='address', required=True, widget=forms.TextInput, help_text='Enter address')
     phone = forms.CharField(label='phone', required=True, widget=forms.TextInput, help_text='Enter phone number (+3752911122333)')
     other = forms.CharField(label='comment', required=True, widget=forms.TextInput, help_text='Enter comment')
-    # status = forms.CharField(label='status', required=True, widget=forms.TextInput, help_text='Choise status order')
 

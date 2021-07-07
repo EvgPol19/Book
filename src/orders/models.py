@@ -1,8 +1,8 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
 from carts.models import Cart
 from forms.models import StatusOrder
-
-# Create your models here.
+from comments.models import Comment
 
 
 class Order(models.Model):
@@ -47,6 +47,7 @@ class Order(models.Model):
         null=True,
         default='No record'
     )
+    comments = GenericRelation(Comment)
     created = models.DateTimeField(
         verbose_name='order created',
         auto_now=False,
@@ -68,4 +69,4 @@ class Order(models.Model):
         default=False
     )
     def __str__(self) -> str:
-        return f'{self.phone}, {self.status_cancel}'
+        return f'{self.pk}, {self.phone}, {self.status_cancel}'

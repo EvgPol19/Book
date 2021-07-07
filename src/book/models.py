@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
 from forms import models as form
 from django.urls import reverse
+from comments.models import Comment
 
 # Create your models here.
 class Book(models.Model):
@@ -70,6 +72,7 @@ class Book(models.Model):
     rating = models.PositiveIntegerField(
         verbose_name='Rating (0-10)'
     )
+    comments = GenericRelation(Comment)
     created = models.DateTimeField(
         verbose_name = 'Was catalogued',
         auto_now=False,

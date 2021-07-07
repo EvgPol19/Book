@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load comment_tag %}
 {% block title %} Заказ  {% endblock title %}
 {% block body %}
 <h1> Order № {{ object.pk }}</h1><br>
@@ -57,5 +57,5 @@
     <div class="alert alert-primary" role="alert">
         <a href="{% url 'orders:manager_order_list'%}">To the order list</a>
     </div>
-
+{% show_comments %}
 {% endblock body %}

@@ -3,7 +3,7 @@ from django.views.generic import FormView, TemplateView, ListView, DetailView, U
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from . import models, forms
 from carts.models import Cart
 
@@ -71,7 +71,7 @@ class OrderCreate(FormView):
         return context
 
 #______________customers view______________
-class CustomerOrderListView(LoginRequiredMixin, ListView):
+class CustomerOrderListView(UserPassesTestMixin, ListView):
     model = models.Order
     template_name = 'orders/customer_order_list.html'
     paginate_by = 10
@@ -80,31 +80,33 @@ class CustomerOrderListView(LoginRequiredMixin, ListView):
         carts = customer.carts.all()
         orders = models.Order.objects.filter(cart__in=carts)
         return orders
+    def test_func(self):
+        return  self.request.user.is_staff or self.request.user
 
-class CustomerOrderDetailView(LoginRequiredMixin, DetailView):
+class CustomerOrderDetailView(UserPassesTestMixin, DetailView):
     model = models.Order
     template_name = 'orders/customer_order_detail.html'
 
-    def get_object(self):
-        customer = self.request.user
-        carts = customer.carts.all()
-        print(carts)
-        orders = models.Order.objects.filter(cart__in=carts)
-        return orders
+    def test_func(self):
+        return self.request.user.is_staff or self.request.user == models.Order.objects.filter(pk=self.kwargs.get('pk')).first().cart.customer
 
-
-class CustomerOrderUpdateView(LoginRequiredMixin, UpdateView):
+class CustomerOrderUpdateView(UserPassesTestMixin, UpdateView):
     model = models.Order
     fields = ['country', 'city', 'address', 'phone', 'other']
     template_name = 'orders/customer_order_update.html'
     success_url = reverse_lazy('orders:customer_order_list')
-    def get_object(self):
-        return self.request.user.carts.goods
-class CustomerCancelOrder(LoginRequiredMixin, UpdateView):
+
+    def test_func(self):
+        return self.request.user.is_staff or self.request.user == models.Order.objects.filter(pk=self.kwargs.get('pk')).first().cart.customer
+
+class CustomerCancelOrder(UserPassesTestMixin, UpdateView):
     template_name = 'orders/cancel_order.html'
     model = models.Order
     fields = ('status_cancel',)
     success_url = reverse_lazy('orders:customer_order_list')
+
+    def test_func(self):
+        return self.request.user.is_staff or self.request.user == models.Order.objects.filter(pk=self.kwargs.get('pk')).first().cart.customer
 
 #______________managers views______________
 class ManagerOrderListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):

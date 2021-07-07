@@ -1,0 +1,23 @@
+<br><br><h1>Comments</h1>
+<form action="{% url 'comments:create_comment' %}" method="POST">
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Entery comment</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
+        <input type="hidden" name="next_step" value="{{ next_step }}">
+        <input type="hidden" name="content_type_id" value="{{ content_type_id }}">
+        <input type="hidden" name="object_id" value="{{ object_id }}">
+    </div>
+    {% csrf_token %}
+    <button type="submit" class="btn btn" style="background-color: rgb(75, 184, 133); color: white;">Comment</button>
+</form><br>
+{% for comment in comments %}
+<div class="mb-3" style="width: 40%;
+">
+    <label for="exampleFormControlTextarea1" class="form-label">{{ comment.author }}</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
+        {{ comment.text }}
+    </textarea>
+    {{ comment.created }}
+</div>
+{% endfor %}
+
