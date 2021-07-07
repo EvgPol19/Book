@@ -5,7 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
-from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from .forms import UserCreateForm, ProfileCreateForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth import authenticate, login
