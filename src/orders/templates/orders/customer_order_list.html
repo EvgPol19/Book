@@ -12,7 +12,6 @@
                     <th scope="col">Total summ</th>
                     <th scope="col">Created</th>
                     <th scope="col">Updated</th>
-                    <th scope="col">Comment</th>
                     <th scope="col">Status|Cancel order?</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -28,7 +27,6 @@
                 <td>{{ order.cart.total_summ }}</td>
                 <td>{{ order.created }}</td>
                 <td>{{ order.updated }}</td>
-                <td>{{ order.other }}</td>
                 <td>
                     {% if  not order.status_cancel %}
                     {{ order.status_mng }}
@@ -58,4 +56,7 @@
             {% endfor %}
         </table>
         {% include 'paginator.html' %}
+        <div class="alert alert-primary" role="alert">
+            <a href="{% url 'customer:profile_detail' %}">Back to the profile</a>
+        </div>
 {% endblock body %}
