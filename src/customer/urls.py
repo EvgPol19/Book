@@ -13,4 +13,5 @@ urlpatterns = [
     path('user_update/', views.UserUpdateView.as_view(), name='user_update'),
     path('change_password/', views.UserPasswordChangeView.as_view(), name='change_password'),
     path('change_password_done/', views.UserPasswordChangeDoneView.as_view(), name='change_password_done'),
+    path('profiles_list/', views.ProfileListView.as_view(), name='profiles_list'),
 ]

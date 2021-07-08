@@ -53,7 +53,6 @@ class BookInCartDeleteView(RedirectView):
 class CartView(View):
     def post(self, request):
         action = request.POST.get('submit')
-        print(action)
         cart_id = self.request.session.get('cart_id') #словареподобный объект
         cart, created = models.Cart.objects.get_or_create(
             pk = cart_id,

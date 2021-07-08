@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Books{% endblock title %}
+{% block body %}
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            {% for profile in object_list %}
+            <td><a href="{% url 'customer:profile_detail' %}">{{ profile.user.username }}</a></td>
+            <td>
+                <button type="button" class="btn btn-warning">
+                    <a href="{% url 'customer:user_update' %}" style="color: rgb(82, 79, 79);">Change master data?</a>
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger">
+                    <a href="{% url 'customer:profile_update' %}" style="color: rgb(82, 79, 79);">Change additional data?</a>
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+</table>
+    {% include 'paginator.html' %}
+    </nav>
+{% endblock body %}
+
