@@ -9,25 +9,45 @@
     <a href="{% url 'orders:customer_order_list' %}" style="color: rgb(82, 79, 79);">My orders</a>
 </div>
 {% endif %}
-<p></p>
-Login: {{object.username}}</br>
-<p></p>
-e-mail: {{object.email}}</br>
-<p></p>
-Phone: {{object.customer.phone}}</br>
-<p></p>
-Country: {{object.customer.country}}</br>
-<p></p>
-City: {{object.customer.city}}</br>
-<p></p>
-Postcode: {{object.customer.postcode}}</br>
-<p></p>
-Address 1: {{object.customer.аddress_1}}</br>
-<p></p>
-Address 2: {{object.customer.аddress_2}}</br>
-<p></p>
-Other: {{object.customer.other}}</br>
-</br>
+<table class="table table-striped">
+    <tr>
+        <td>Username</td>
+        <td>{{object.username}}</td>
+    </tr>
+    <tr>
+        <td>e-mail</td>
+        <td>{{object.email}}</td>
+    </tr>
+    <tr>
+        <td>Phone</td>
+        <td>{{object.customer.phone}}</td>
+    </tr>
+    <tr>
+        <td>Country</td>
+        <td>{{object.customer.country}}</td>
+    </tr>
+    <tr>
+        <td>City</td>
+        <td>{{object.customer.city}}</td>
+    </tr>
+    <tr>
+        <td>Postcode</td>
+        <td>{{object.customer.postcode}}</td>
+    </tr>
+    <tr>
+        <td>Address 1</td>
+        <td>{{object.customer.аddress_1}}</td>
+    </tr>
+    <tr>
+        <td>Address 2</td>
+        <td>{{object.customer.аddress_2}}</td>
+    </tr>
+    <tr>
+        <td>Other</td>
+        <td>{{object.customer.other}}</td>
+    </tr>
+</table>
+
 {% if not user.is_staff or user.is_superuser %}
 <div class="alert alert-info" role="alert">
     <a href="{% url 'customer:change_password' %}" style="color: rgb(82, 79, 79);">Change password?</a>

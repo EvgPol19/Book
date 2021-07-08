@@ -10,6 +10,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Book</th>
                 <th scope="col">Total summ</th>
+                <th scope="col">Customer</th>
                 <th scope="col">Status|Cancel order?</th>
                 <th scope="col">Country</th>
                 <th scope="col">City</th>
@@ -31,6 +32,7 @@
                 {% endfor %}
             </td>
             <td>{{ order.cart.total_summ }}</td>
+            <td>{{ order.cart.customer.username }}</td>
             <td>
                 {% if  not order.status_cancel %}
                 {{ order.status_mng }}

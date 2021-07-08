@@ -2,8 +2,13 @@
 {% load comment_tag %}
 {% block title %}Order {{ object.pk }}{% endblock title %}
 {% block body %}
-    <h1> Order № {{ object.pk }}</h1><br>
+    <h1> Order № {{ object.pk }} <br>
+        {{ object.cart.customer.first_name}} {{ object.cart.customer.last_name}}</h1><br>
     <table class="table table-striped">
+        <tr>
+            <td>Username</td>
+            <td>{{ object.cart.customer.username }}</td>
+        </tr>
         <tr>
             <td>Books</td>
             <td>
