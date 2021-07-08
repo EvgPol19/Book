@@ -3,11 +3,12 @@
 {% load crispy_forms_tags %}
 {% block title %} Profile {% endblock title %}
 {% block body %}
-
+{% if not user.is_staff or user.is_superuser %}
 <h1>{{object.first_name}} {{ object.last_name }}</h1>
 <div class="alert" style="background-color: rgb(122, 206, 206);" role="alert">
     <a href="{% url 'orders:customer_order_list' %}" style="color: rgb(82, 79, 79);">My orders</a>
 </div>
+{% endif %}
 <p></p>
 Login: {{object.username}}</br>
 <p></p>
@@ -27,6 +28,7 @@ Address 2: {{object.customer.аddress_2}}</br>
 <p></p>
 Other: {{object.customer.other}}</br>
 </br>
+{% if not user.is_staff or user.is_superuser %}
 <div class="alert alert-info" role="alert">
     <a href="{% url 'customer:change_password' %}" style="color: rgb(82, 79, 79);">Change password?</a>
 </div>
@@ -37,6 +39,5 @@ Other: {{object.customer.other}}</br>
 <div class="alert alert-secondary" role="alert">
     <a href="{% url 'customer:profile_update' %}" style="color: rgb(82, 79, 79);">Change additional data?</a>
 </div>
-
-
+{% endif %}
 {% endblock body %}

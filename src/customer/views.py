@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 from django.views.generic import CreateView, UpdateView, DetailView, ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
@@ -78,7 +78,8 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-class ProfileListView(ListView):
+class ProfileListView(PermissionRequiredMixin, ListView):
     model = Profile
     template_name = 'customer/profiles_list.html'
     paginate_by = 10
+    permission_required = 'orders.view_order'
