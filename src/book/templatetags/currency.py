@@ -3,7 +3,7 @@ from django import template
 
 register = template.Library()
 
-USD = 'https://www.nbrb.by/api/exrates/rates/145'
+USD = 'https://www.nbrb.by/api/exrates/rates/840?parammode=1'
 @register.simple_tag
 def currency_rate():
     rate = requests.get(USD)
