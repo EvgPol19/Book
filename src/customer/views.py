@@ -3,6 +3,7 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView,
 from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse, reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 from .models import Profile
@@ -60,16 +61,19 @@ class UserProfileDetailView(LoginRequiredMixin, DetailView):
     template_name = 'customer/profile_detail.html'
 
 #----------------update----------------
-class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+class ProfileUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Profile
     template_name = 'customer/profile_update.html'
     form_class = ProfileUpdateForm
+    success_message = 'Data has been changed'
     success_url = reverse_lazy('home')
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
+
+class UserUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'customer/user_update.html'
     form_class = UserUpdateForm
+    success_message = 'Data has been changed'
     success_url = reverse_lazy('home')
 
 class ProfileListView(PermissionRequiredMixin, ListView):

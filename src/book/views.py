@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse, reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from book.models import Book
 from forms.models import GenreField, AuthorField, SeriesField, PublisherField
@@ -36,20 +37,22 @@ class BookListView(ListView):
         q = self.request.GET.get('q')
         return super().get_context_data(**kwargs)
 
-class BookCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+class BookCreateView(SuccessMessageMixin, PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     model = Book
     form_class = forms.CreateBook
     login_url = '/custumer/login/'
     redirect_field_name = 'redirect_to'
     permission_required = 'book.add_book'
+    success_message = 'Book was created'
     success_url = reverse_lazy('book:book_list')
 
-class BookUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+class BookUpdateView(SuccessMessageMixin, PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Book
     form_class = forms.CreateBook
     login_url = '/custumer/login/'
     redirect_field_name = 'redirect_to'
     permission_required = 'book.change_book'
+    success_message = 'Book has been changed'
     success_url = reverse_lazy('book:book_list')
 
 class BookDeletelView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):

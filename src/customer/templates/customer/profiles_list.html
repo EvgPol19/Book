@@ -2,16 +2,34 @@
 {% block title %}Books{% endblock title %}
 {% block body %}
 <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">City</th>
+            <th scope="col">Address</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
     <tbody>
         <tr>
             {% for profile in object_list %}
-            <td><a href="{% url 'customer:profile_detail' profile.user.pk %}">{{ profile.user.username }}</a></td>
+            <td>{{ forloop.counter }}</a></td>
+            <td>{{ profile.user.username }}</a></td>
+            <td>{{ profile.user.first_name }}</a></td>
+            <td>{{ profile.user.last_name }}</a></td>
+            <td>{{ profile.user.email }}</a></td>
+            <td>{{ profile.phone }}</a></td>
+            <td>{{ profile.city }}</a></td>
+            <td>{{ profile.аddress_1 }}</a></td>
             <td>
                 <button type="button" class="btn btn-warning">
                     <a href="{% url 'customer:user_update' profile.user.pk %}" style="color: rgb(82, 79, 79);">Change master data?</a>
                 </button>
-            </td>
-            <td>
                 <button type="button" class="btn btn-danger">
                     <a href="{% url 'customer:profile_update' profile.pk %}" style="color: rgb(82, 79, 79);">Change additional data?</a>
                 </button>
