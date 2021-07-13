@@ -149,7 +149,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                 {% if request.user.is_authenticated %}
-                <li><a class="dropdown-item" href="{% url 'customer:profile_detail' user.pk %}">{{ user }}</a></li>
+                <li><a class="dropdown-item" href="{% url 'customer:profile_detail' %}">{{ user }}</a></li>
                 {% endif %}
                 <li><a class="dropdown-item" href="{% url 'customer:login' %}">Log in</a></li>
                 <li><a class="dropdown-item" href="{% url 'customer:logout' %}">Log out</a></li>

@@ -58,6 +58,8 @@ class ProfileCreateView(CreateView):
 class UserProfileDetailView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'customer/profile_detail.html'
+    def get_object(self):
+        return self.request.user
 
 #----------------update----------------
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
@@ -65,12 +67,16 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'customer/profile_update.html'
     form_class = ProfileUpdateForm
     success_url = reverse_lazy('customer:profile_detail')
+    def get_object(self):
+        return self.request.user.customer
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'customer/user_update.html'
     form_class = UserUpdateForm
     success_url = reverse_lazy('customer:profile_detail')
+    def get_object(self):
+        return self.request.user
 
 class ProfileListView(PermissionRequiredMixin, ListView):
     model = Profile
