@@ -169,7 +169,6 @@
                 1 USD = {% currency_rate %} BYN</span>
             </li>
           </ul>
-          {% if not user.is_staff %}
               <div class='cart'>
                 <a href="{% url 'carts:cart_detail' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -177,7 +176,6 @@
                   </svg>
                 </a>
               </div>
-          {% endif %}
         </div>
       </div>
     </nav><br>
