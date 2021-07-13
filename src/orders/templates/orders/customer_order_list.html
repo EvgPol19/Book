@@ -54,6 +54,6 @@
         </table>
         {% include 'paginator.html' %}
         <div class="alert alert-primary" role="alert">
-            <a href="{% url 'customer:profile_detail' %}">To the profile</a>
+            <a href="{% url 'customer:profile_detail' user.pk %}">To the profile</a>
         </div>
 {% endblock body %}

@@ -53,11 +53,11 @@
     <a href="{% url 'customer:change_password' %}" style="color: rgb(82, 79, 79);">Change password?</a>
 </div>
 <div class="alert alert-primary" role="alert">
-    <a href="{% url 'customer:user_update' %}" style="color: rgb(82, 79, 79);">Change master data?</a>
+    <a href="{% url 'customer:user_update' user.pk %}" style="color: rgb(82, 79, 79);">Change master data?</a>
 </div>
 
 <div class="alert alert-secondary" role="alert">
-    <a href="{% url 'customer:profile_update' %}" style="color: rgb(82, 79, 79);">Change additional data?</a>
+    <a href="{% url 'customer:profile_update' object.customer.pk %}" style="color: rgb(82, 79, 79);">Change additional data?</a>
 </div>
 {% endif %}
 {% endblock body %}
