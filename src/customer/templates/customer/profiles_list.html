@@ -5,8 +5,7 @@
     <tbody>
         <tr>
             {% for profile in object_list %}
-            {{profile.customer.pk}}
-            <td><a href="{% url 'customer:profile_detail' profile.pk %}">{{ profile.user.username }}</a></td>
+            <td><a href="{% url 'customer:profile_detail' profile.user.pk %}">{{ profile.user.username }}</a></td>
             <td>
                 <button type="button" class="btn btn-warning">
                     <a href="{% url 'customer:user_update' profile.user.pk %}" style="color: rgb(82, 79, 79);">Change master data?</a>
