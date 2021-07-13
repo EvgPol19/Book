@@ -5,15 +5,15 @@
     <tbody>
         <tr>
             {% for profile in object_list %}
-            <td><a href="{% url 'customer:profile_detail' %}">{{ profile.user.username }}</a></td>
+            <td><a href="{% url 'customer:profile_detail' profile.pk %}">{{ profile.user.username }}</a></td>
             <td>
                 <button type="button" class="btn btn-warning">
-                    <a href="{% url 'customer:user_update' %}" style="color: rgb(82, 79, 79);">Change master data?</a>
+                    <a href="{% url 'customer:user_update' user.pk %}" style="color: rgb(82, 79, 79);">Change master data?</a>
                 </button>
             </td>
             <td>
                 <button type="button" class="btn btn-danger">
-                    <a href="{% url 'customer:profile_update' %}" style="color: rgb(82, 79, 79);">Change additional data?</a>
+                    <a href="{% url 'customer:profile_update' profile.pk %}" style="color: rgb(82, 79, 79);">Change additional data?</a>
                 </button>
             </td>
         </tr>
