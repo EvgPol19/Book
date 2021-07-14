@@ -44,14 +44,9 @@
             <td>{{object.cart.total_summ}}</td>
         </tr>
         <tr>
-            <td>Status|Cancel order</td>
+            <td>Status</td>
             <td>
-                {% if  not order.status_cancel %}
-                {{ order.status_mng }}
-                {% endif %}
-                {% if order.status_cancel %}
-                {% include 'cancel_order.html' %}
-                {% endif %}
+                {% include 'statuses.html' %}
             </td>
         </tr>
     </table>
