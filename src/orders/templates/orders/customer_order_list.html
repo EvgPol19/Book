@@ -26,7 +26,11 @@
                 </td>
                 <td>{{ order.cart.total_summ }}</td>
                 <td>{{ order.created }}</td>
-                <td>{{ order.updated }}</td>
+                <td>
+                    {% if order.created.date != order.updated.date  %}
+                    {{ order.updated }}
+                    {% endif %}
+                </td>
                 <td>
                     {% include 'statuses.html' %}
                 </td>

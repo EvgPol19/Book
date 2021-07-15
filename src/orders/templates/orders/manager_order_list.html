@@ -34,7 +34,11 @@
             </td>
             <td>{{ order.phone }}</td>
             <td>{{ order.created }}</td>
-            <td>{{ order.updated }}</td>
+            <td>
+                {% if order.created.date != order.updated.date  %}
+                {{ order.updated }}
+                {% endif %}
+            </td>
             <td>
                 <a href="{% url 'orders:manager_cancel_order' order.pk %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
